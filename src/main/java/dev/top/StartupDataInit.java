@@ -28,9 +28,9 @@ public class StartupDataInit {
         this.versionRepo.save(new Version("v4"));
 
         this.colleguesRepo.save(new Collegues("Licorne", 2, "https://www.eve-grenoble.fr/images/2018/passion-de-licorne-t-shirt-enfant-licorne-dab-3603071959097_740x.jpg"));
-        this.colleguesRepo.save(new Collegues("Peter Pan", 3, "imageUrl"));
-        this.colleguesRepo.save(new Collegues("Shrek", 10, "imageUrl"));
-        this.colleguesRepo.save(new Collegues("Chat Potte", 10, "imageUrl"));
+        this.colleguesRepo.save(new Collegues("Peter Pan", 3, "https://i.pinimg.com/originals/df/9a/91/df9a9108224cdfa518c8e517cb67c20f.jpg"));
+        this.colleguesRepo.save(new Collegues("Shrek", 10, "https://pbs.twimg.com/profile_images/2293448946/image.jpg"));
+        this.colleguesRepo.save(new Collegues("Chat Potte", 10, "https://i.pinimg.com/originals/0b/b7/33/0bb733d83ffdb51dae9317c45c8dba2b.jpg"));
 
     }
 }
