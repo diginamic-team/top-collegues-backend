@@ -5,27 +5,45 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import dev.top.controller.Avis;
 import dev.top.entities.Collegue;
+import dev.top.exception.TopCollegueException;
 import dev.top.repos.CollegueRepo;
 
 @Service
 public class CollegueService {
 
-    @Autowired
-    private CollegueRepo collegueRepo;
-
-    public Collegue save(Collegue collegue){
-        collegueRepo.save(collegue);
-        return collegue;
-    }
+    private CollegueRepo colRepo;
     
-    public Optional<Collegue> findById(Long id) {
-        return collegueRepo.findById(id);
+    public CollegueService(CollegueRepo collegueRepo) {
+		this.colRepo = collegueRepo;
+	}
+
+	public List<Collegue> findAll() {
+        return colRepo.findAll();
     }
 
-    public List<Collegue> findAll() {
-        return collegueRepo.findAll();
-    }
+	@Transactional
+	public Collegue voter(String pseudo, Avis avis) {
+
+		if(pseudo == null || avis == null) {
+			throw new TopCollegueException("au moins un des paramètres n'est pas valorisé");
+		}
+		
+		Collegue collegueTrouve = this.colRepo.findByPseudo(pseudo).orElseThrow(() -> new TopCollegueException("pseudo inexistant"));
+		
+		Integer score = collegueTrouve.getScore();
+		
+		if(avis.equals(Avis.AIMER)) {
+			collegueTrouve.setScore(score + 100);
+		} else if(avis.equals(Avis.DETESTER)) {
+			collegueTrouve.setScore(score - 100);
+		}
+		
+		return collegueTrouve;
+		
+	}
   
 }
