@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="collegues")
 
@@ -14,7 +16,8 @@ public class Collegues {
     @Id
     @Column(name = "id_collegue")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @JsonIgnore
+    private Long id;
 
     @Column(name= "pseudo")
     private String pseudo;
@@ -37,14 +40,14 @@ public class Collegues {
     /**
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

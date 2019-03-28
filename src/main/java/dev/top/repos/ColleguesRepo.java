@@ -11,10 +11,10 @@ import dev.top.entities.Collegues;
 @Repository
 public interface ColleguesRepo extends JpaRepository<Collegues, Integer> {
 
-    public Optional<Collegues> findById(Integer id);
+    Optional<Collegues> findById(Long id);
 
-    public Optional<Collegues> findByPseudo(String pseudo);
+    Optional<Collegues> findByPseudo(String pseudo);
 
-    public List<Collegues> findAll();
+    List<Collegues> findAll();
 
 }
