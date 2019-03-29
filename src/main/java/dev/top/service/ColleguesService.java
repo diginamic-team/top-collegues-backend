@@ -82,12 +82,6 @@ public class ColleguesService {
 
             } else {
 
-                // CollegueRecup collRecup = resultat[0];
-
-                // String nom = collRecup.getNom();
-                // String prenom = collRecup.getPrenom();
-                // String photo = collRecup.getPhoto();
-
                 Collegues newCol = new Collegues();
 
                 newCol.setScore(100);

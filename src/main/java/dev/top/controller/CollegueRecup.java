@@ -6,7 +6,11 @@ public class CollegueRecup {
     // recup les infos
     private String nom;
     private String prenom;
+    private String email;
+    private String adresse;
     private String photo;
+
+    public CollegueRecup(){}
 
     public CollegueRecup(String nom, String prenom, String photo) {
         this.nom = nom;
@@ -14,9 +18,15 @@ public class CollegueRecup {
         this.photo = photo;
     }
 
-    public CollegueRecup() {
-	}
-
+    public CollegueRecup(String nom, String prenom, String email, String adresse, String photo) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.adresse = adresse;
+        this.photo = photo;
+    }
+    
+    
 	/**
      * @return the nom
      */
