@@ -1,12 +1,21 @@
 package dev.top.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.top.controller.EnumAction;
 import dev.top.entities.Collegue;
+import dev.top.entities.NouveauCollegue;
 import dev.top.exception.TopCollegueException;
 import dev.top.repos.CollegueRepo;
 
@@ -24,7 +33,7 @@ public class CollegueService  {
 	}
 	
 	
-	@Transactional //pour faire un rollback et ne rien sauver en base
+	@Transactional //pour faire un rollback et ne rien sauver en base si problème
 	public Collegue voter(String pseudo, EnumAction action) {
 		
 		if(pseudo == null || action == null) {
@@ -42,6 +51,40 @@ public class CollegueService  {
 		}
 		
 		return collegueTrouve;
+	}
+	
+	
+	public Collegue getCollegueExterneJson(NouveauCollegue nouveauCollegue) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String resourceUrl = "https://tommy-sjava.cleverapps.io/collegues";
+		CollegueExterne[] response = restTemplate.getForObject(resourceUrl +"?matricule="+nouveauCollegue.getMatricule(), CollegueExterne[].class);
+		
+		Collegue colaAjouter = new Collegue();
+		
+		if(response.length == 0) {
+			throw new TopCollegueException("Ce matricule n'existe pas");
+		}else{
+			CollegueExterne collegueExterne = response[0];
+			
+			colaAjouter.setPseudo(nouveauCollegue.getPseudo());
+			
+			if(StringUtils.isEmpty(nouveauCollegue.getUrlImage())) {
+				colaAjouter.setImageUrl(collegueExterne.getPhoto());
+			} else {
+				colaAjouter.setImageUrl(nouveauCollegue.getUrlImage());
+			}
+			
+			colaAjouter.setScore(0);
+			
+			
+			this.colRepo.save(colaAjouter);
+			
+						
+		};
+		
+		return colaAjouter;
+		
 	}
 	
 }
