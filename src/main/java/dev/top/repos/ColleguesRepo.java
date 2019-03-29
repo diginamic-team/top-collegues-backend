@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import dev.top.entities.Collegues;
 
 @Repository
-public interface ColleguesRepo extends JpaRepository<Collegues, Integer> {
+public interface ColleguesRepo extends JpaRepository<Collegues, Long> {
 
     Optional<Collegues> findById(Long id);
 

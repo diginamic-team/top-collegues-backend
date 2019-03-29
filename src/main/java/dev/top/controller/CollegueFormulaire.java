@@ -1,14 +1,21 @@
 package dev.top.controller;
 
-public class NewCollegue {
+public class CollegueFormulaire {
 
     private String matricule;
     private String pseudo;
     private String photoUrl;
 
+    public CollegueFormulaire() {
+    }
 
-    public NewCollegue(String matricule, String pseudo, String photoUrl) {
+    public CollegueFormulaire(String matricule, String pseudo, String photoUrl) {
         this.matricule = matricule;
+        this.pseudo = pseudo;
+        this.photoUrl = photoUrl;
+    }
+
+    public CollegueFormulaire(String pseudo, String photoUrl) {
         this.pseudo = pseudo;
         this.photoUrl = photoUrl;
     }
@@ -54,7 +61,5 @@ public class NewCollegue {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
-    
-    
 
 }

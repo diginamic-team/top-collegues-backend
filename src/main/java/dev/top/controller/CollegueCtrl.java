@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.top.entities.Collegues;
+import dev.top.repos.ColleguesRepo;
 import dev.top.service.ColleguesService;
-
 
 @CrossOrigin
 @RestController
@@ -34,9 +34,11 @@ public class CollegueCtrl {
 
         return this.colleguesService.voter(pseudo, vote.getAction());
     }
-    
+
     @PostMapping
-    public Collegues recupNewCollegue (@RequestBody NewCollegue newCol) {
-        return this.collegues.recupNewCollegue(matricule, pseudo, photoUrl));
+    public Collegues creerNewCollegue(@RequestBody CollegueFormulaire colForm) {
+
+        return this.colleguesService.creerNewCollegue(colForm);
     }
+
 }

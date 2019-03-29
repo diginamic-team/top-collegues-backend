@@ -13,4 +13,6 @@ public class ErreurController {
     public ResponseEntity<?> erreur(Throwable ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    
 }
