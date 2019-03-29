@@ -16,11 +16,6 @@ public class StartupDataInit {
 
     @EventListener(ContextRefreshedEvent.class)
     public void init() {
-
-
-        
-        this.collegueRepo.save(new Collegue(1, 5000, "https", "pseudo1"));
-        this.collegueRepo.save(new Collegue(2, 1000, "https", "pseudo2"));
         
         this.collegueRepo.save(new Collegue(3, 5000, "https://media.giphy.com/media/8TRhWZqy5vmU0/giphy.gif", "Mabel"));
         this.collegueRepo.save(new Collegue(4, 4500, "https://media.giphy.com/media/12aZlLvMQtb9e0/giphy.gif", "Dipper"));

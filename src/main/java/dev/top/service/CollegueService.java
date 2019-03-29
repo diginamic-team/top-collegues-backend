@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.top.controller.Avis;
 import dev.top.entities.Collegue;
+import dev.top.exception.CollegueException;
 import dev.top.exception.TopCollegueException;
 import dev.top.repos.CollegueRepo;
 
@@ -20,9 +21,19 @@ public class CollegueService {
     public CollegueService(CollegueRepo collegueRepo) {
 		this.colRepo = collegueRepo;
 	}
+    
+    public Collegue save(Collegue collegue){
+    	colRepo.save(collegue);
+        return collegue;
+}
 
 	public List<Collegue> findAll() {
         return colRepo.findAll();
+    }
+	
+    public Collegue findByPseudo(String pseudo) {
+        return colRepo.findByPseudo(pseudo).orElseThrow(() -> new CollegueException("Personne avec ce pseudo dans la BDD"));
+
     }
 
 	@Transactional
@@ -45,5 +56,6 @@ public class CollegueService {
 		return collegueTrouve;
 		
 	}
+
   
 }

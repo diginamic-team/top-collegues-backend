@@ -1,35 +1,39 @@
 package dev.top.controller;
 
 public class CollegueDTO {
-	
-	
-	 private Integer matricule;
-	 private String pseudo;
 
-	 private String photoUrl;
+	private String matricule;
+	private String nom;
 
-	public Integer getMatricule() {
+	private String photo;
+
+	public String getMatricule() {
 		return matricule;
 	}
 
-	public void setMatricule(Integer matricule) {
+	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
 
-	public String getPseudo() {
-		return pseudo;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
-	} 
-	 
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	@Override
+	public String toString() {
+		return "CollegueDTO [matricule=" + matricule + ", nom=" + nom + ", photo=" + photo + "]";
+	}
+
 }
