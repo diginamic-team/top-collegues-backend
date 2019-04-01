@@ -59,10 +59,14 @@ public class CollegueService {
 
 		if (response.length == 0) {
 			throw new TopCollegueException("Ce matricule n'existe pas");
-		} else {
+			
+		} else if (this.colRepo.findByPseudo(nouveauCollegue.getPseudo()).isPresent()) {
+				
+			throw new TopCollegueException("Pseudo déjà existant");
 
-			if (this.colRepo.findByPseudo(nouveauCollegue.getPseudo()).isPresent()) {
-
+				
+			} else {
+				
 				CollegueExterne collegueExterne = response[0];
 
 				colaAjouter.setPseudo(nouveauCollegue.getPseudo());
@@ -95,12 +99,8 @@ public class CollegueService {
 
 				colaAjouter.setScore(0);
 
-				this.colRepo.save(colaAjouter);
-
-			} else {
-				throw new TopCollegueException("Pseudo déjà existant");
+				this.colRepo.save(colaAjouter);	
 			}
-		}
 		;
 
 		return colaAjouter;
