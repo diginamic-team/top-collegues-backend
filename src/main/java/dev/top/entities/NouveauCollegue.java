@@ -4,7 +4,7 @@ public class NouveauCollegue {
 
 	private String matricule;
 	private String pseudo;
-	private String urlImage;
+	private String imageUrl;
 	
 	
 	public String getMatricule() {
@@ -23,17 +23,17 @@ public class NouveauCollegue {
 		this.pseudo = pseudo;
 	}
 	
-	public String getUrlImage() {
-		return urlImage;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 	
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	@Override
 	public String toString() {
-		return "NouveauCollegue [matricule=" + matricule + ", pseudo=" + pseudo + ", urlImage=" + urlImage + "]";
+		return "NouveauCollegue [matricule=" + matricule + ", pseudo=" + pseudo + ", urlImage=" + imageUrl + "]";
 	}
 	
 		

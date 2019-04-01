@@ -1,17 +1,12 @@
 package dev.top.service;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.top.controller.EnumAction;
 import dev.top.entities.Collegue;
@@ -55,6 +50,7 @@ public class CollegueService  {
 	
 	
 	public Collegue getCollegueExterneJson(NouveauCollegue nouveauCollegue) {
+		System.out.println(nouveauCollegue);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String resourceUrl = "https://tommy-sjava.cleverapps.io/collegues";
@@ -69,10 +65,30 @@ public class CollegueService  {
 			
 			colaAjouter.setPseudo(nouveauCollegue.getPseudo());
 			
-			if(StringUtils.isEmpty(nouveauCollegue.getUrlImage())) {
+			colaAjouter.setNom(collegueExterne.getNom());
+			
+			colaAjouter.setPrenom(collegueExterne.getPrenom());
+			
+			colaAjouter.setDateNaissance(collegueExterne.getDateNaissance());
+			
+			colaAjouter.setEmail(collegueExterne.getEmail());
+			
+			colaAjouter.setMatricule(collegueExterne.getMatricule());
+			
+			colaAjouter.setSexe(collegueExterne.getSexe());
+			
+			colaAjouter.setDepartement(collegueExterne.getDepartement());
+			
+			colaAjouter.setSubalternes(collegueExterne.getSubalternes());
+			
+			colaAjouter.setPassword(collegueExterne.getPassword());
+			
+			colaAjouter.setAdresse(collegueExterne.getAdresse());
+			
+			if(StringUtils.isEmpty(nouveauCollegue.getImageUrl())) {
 				colaAjouter.setImageUrl(collegueExterne.getPhoto());
 			} else {
-				colaAjouter.setImageUrl(nouveauCollegue.getUrlImage());
+				colaAjouter.setImageUrl(nouveauCollegue.getImageUrl());
 			}
 			
 			colaAjouter.setScore(0);
@@ -85,6 +101,10 @@ public class CollegueService  {
 		
 		return colaAjouter;
 		
+	}
+
+	public Collegue findCollegue(String pseudo) {
+		return this.colRepo.findByPseudo(pseudo).orElseThrow(()-> new TopCollegueException("Pseudo inexistant"));
 	}
 	
 }
