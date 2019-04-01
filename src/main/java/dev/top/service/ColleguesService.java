@@ -66,6 +66,7 @@ public class ColleguesService {
     @Transactional
     public Collegues creerNewCollegue(CollegueFormulaire cf) {
 
+        // tester l'existence du matricule
         if (cf.getMatricule() == null) {
 
             throw new CheckCollegue("matricule non saisie");
@@ -76,30 +77,41 @@ public class ColleguesService {
             RestTemplate restTemplate = new RestTemplate();
             CollegueRecup[] resultat = restTemplate.getForObject(url, CollegueRecup[].class);
 
+            //tester si le champ est null
             if (resultat.length == 0) {
 
                 throw new CheckCollegue("Collegue inexistant");
 
+            // tester unicité du pseudo
+            } else if (this.colleguesRepo.findByPseudo(cf.getPseudo()).isPresent()) {
+
+                throw new CheckCollegue("Doublon de Pseudo, changer le pseudo");
+            }
+
+            Collegues newCol = new Collegues();
+
+            newCol.setScore(100);
+            newCol.setPseudo(cf.getPseudo());
+            newCol.setPrenom(resultat[0].getPrenom());
+            newCol.setNom(resultat[0].getNom());
+            newCol.setEmail(resultat[0].getEmail());
+            newCol.setAdresse(resultat[0].getAdresse());
+
+            //tester la presence ou non d'une photo dans formulaire
+            if (cf.getPhotoUrl() == null) {
+
+                newCol.setImageUrl(resultat[0].getPhoto());
+
             } else {
 
-                Collegues newCol = new Collegues();
+                newCol.setImageUrl(cf.getPhotoUrl());
 
-                newCol.setScore(100);
-                newCol.setPseudo(cf.getPseudo());
-
-                if (cf.getPhotoUrl() == null) {
-
-                    newCol.setImageUrl(resultat[0].getPhoto());
-
-                } else {
-
-                    newCol.setImageUrl(cf.getPhotoUrl());
-                }
-
-                colleguesRepo.save(newCol);
-
-                return newCol;
             }
+
+            colleguesRepo.save(newCol);
+
+            return newCol;
         }
     }
+
 }

@@ -69,4 +69,32 @@ public class CollegueRecup {
         this.photo = photo;
     }
 
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the adresse
+     */
+    public String getAdresse() {
+        return adresse;
+    }
+
+    /**
+     * @param adresse the adresse to set
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
 }

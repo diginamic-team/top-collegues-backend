@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="collegues")
+@Table(name = "collegues")
 
 public class Collegues {
     @Id
@@ -19,22 +19,45 @@ public class Collegues {
     @JsonIgnore
     private Long id;
 
-    @Column(name= "pseudo")
+    @Column(name = "pseudo")
     private String pseudo;
 
-    @Column(name= "score")
+    @Column(name = "score")
     private Integer score;
 
-    @Column(name="imageUrl")
+    @Column(name = "imageUrl")
     private String imageUrl;
+
+    @Column(name = "nom")
+    private String nom;
+
+    @Column(name = "prenom")
+    private String prenom;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "adresse")
+    private String adresse;
 
     public Collegues() {
     }
 
     public Collegues(String pseudo, Integer score, String imageUrl) {
-        this.pseudo=pseudo;
-        this.score=score;
-        this.imageUrl=imageUrl;
+        this.pseudo = pseudo;
+        this.score = score;
+        this.imageUrl = imageUrl;
+    }
+
+    public Collegues(String pseudo, Integer score, String imageUrl, String nom, String prenom, String email,
+            String adresse) {
+        this.pseudo = pseudo;
+        this.score = score;
+        this.imageUrl = imageUrl;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.adresse = adresse;
     }
 
     /**
@@ -93,6 +116,60 @@ public class Collegues {
         this.imageUrl = imageUrl;
     }
 
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
 
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @return the prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
+
+    /**
+     * @param prenom the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the adresse
+     */
+    public String getAdresse() {
+        return adresse;
+    }
+
+    /**
+     * @param adresse the adresse to set
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
 
 }
