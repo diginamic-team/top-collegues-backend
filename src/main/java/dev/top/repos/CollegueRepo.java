@@ -10,6 +10,6 @@ public interface CollegueRepo extends JpaRepository<Collegue,Integer>{
 	
 	Optional<Collegue> findByPseudo(String pseudo);
 	
-	 
+	Optional<Collegue> findByMatricule(String matricule); 
 	
 }
